@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mueez Opule — Mechanical Engineering Student</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Typography: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            accent: {
+              DEFAULT: '#2563eb',
+              hover: '#1d4ed8',
+              subtle: '#eff6ff',
+              border: '#dbeafe',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      color: #0f172a;
+      background-color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection {
+      background-color: #dbeafe;
+      color: #1e40af;
+    }
+    .page-view {
+      display: none;
+      animation: fadeIn 0.16s ease-out forwards;
+    }
+    .page-view.active-page {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media print {
+      header, footer, .no-print { display: none !important; }
+      .page-view { display: block !important; margin-bottom: 2rem; }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between text-slate-900 bg-white">
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-16 opacity-0 transition-all duration-200 pointer-events-none flex items-center gap-2 bg-slate-900 text-white px-4 py-2.5 rounded-lg text-xs font-mono shadow-sm">
+    <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i>
+    <span id="toast-text">Copied to clipboard</span>
+  </div>
+
+  <!-- Top Navigation Header -->
+  <header class="border-b border-slate-200 bg-white/95 backdrop-blur-sm sticky top-0 z-30">
+    <div class="max-w-3xl mx-auto px-5 sm:px-6 py-3 sm:h-16 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+      
+      <!-- Brand / Name -->
+      <div class="flex items-center justify-between">
+        <a href="#about" onclick="navigateTo('about', event)" class="flex items-center gap-2 group">
+          <span class="font-semibold text-slate-900 tracking-tight text-base group-hover:text-accent transition-colors">
+            Mueez Opule
+          </span>
+          <span class="text-xs text-slate-400 font-mono">/ NJIT '30</span>
+        </a>
+
+        <!-- Mobile Print Trigger -->
+        <button type="button" onclick="window.print()" class="sm:hidden px-2.5 py-1 rounded-md border border-slate-200 text-xs font-mono text-slate-600 hover:bg-slate-50 flex items-center gap-1 cursor-pointer">
+          <span>Print</span>
+        </button>
+      </div>
+
+      <!-- Multi-Page Navigation Tabs -->
+      <nav aria-label="Primary Navigation" class="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0 text-xs sm:text-sm font-medium text-slate-600">
+        <a href="#about" onclick="navigateTo('about', event)" id="tab-about" class="nav-tab whitespace-nowrap px-2.5 py-1.5 rounded-md text-accent bg-accent-subtle font-semibold transition-colors">
+          <span class="font-mono text-[11px] opacity-75 mr-0.5">01</span> About
+        </a>
+        <a href="#projects" onclick="navigateTo('projects', event)" id="tab-projects" class="nav-tab whitespace-nowrap px-2.5 py-1.5 rounded-md hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          <span class="font-mono text-[11px] opacity-75 mr-0.5">02</span> Projects
+        </a>
+        <a href="#experience" onclick="navigateTo('experience', event)" id="tab-experience" class="nav-tab whitespace-nowrap px-2.5 py-1.5 rounded-md hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          <span class="font-mono text-[11px] opacity-75 mr-0.5">03</span> Experience
+        </a>
+        <a href="#skills" onclick="navigateTo('skills', event)" id="tab-skills" class="nav-tab whitespace-nowrap px-2.5 py-1.5 rounded-md hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          <span class="font-mono text-[11px] opacity-75 mr-0.5">04</span> Skills
+        </a>
+        <a href="#contact" onclick="navigateTo('contact', event)" id="tab-contact" class="nav-tab whitespace-nowrap px-2.5 py-1.5 rounded-md hover:text-slate-900 hover:bg-slate-100 transition-colors">
+          <span class="font-mono text-[11px] opacity-75 mr-0.5">05</span> Contact
+        </a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="max-w-3xl w-full mx-auto px-5 sm:px-6 py-10 sm:py-14 flex-1">
+
+    <!-- ==================== 01 / ABOUT ==================== -->
+    <section id="page-about" class="page-view active-page space-y-10">
+      
+      <!-- Intro Header -->
+      <div class="space-y-4">
+        <div class="text-xs font-mono text-accent">01 / ABOUT</div>
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+          Mueez Opule
+        </h1>
+        <p class="text-sm sm:text-base font-mono text-slate-500 leading-relaxed">
+          Mechanical Engineering Student at NJIT (Albert Dorman Honors College, Junior by credits) · Minor in Electrical Engineering · ASE Certified · Blackwood / Newark, NJ
+        </p>
+        
+        <div class="pt-2 space-y-4 text-base text-slate-600 leading-relaxed">
+          <p>
+            I am a freshman by enrollment (junior standing by credits, graduating May 2030) studying Mechanical Engineering with an Electrical Engineering minor at the <span class="text-slate-900 font-medium">New Jersey Institute of Technology</span>. Prior to enrolling at NJIT, I earned an Associate Degree in Liberal Arts at <span class="text-slate-900 font-medium">Camden County College</span> in May 2026.
+          </p>
+          <p>
+            Outside of classes, I am a member of the <span class="text-slate-900 font-medium">NJIT Formula SAE</span> powertrain subteam, where I work on SolidWorks CAD models for the team's Yamaha R6 engine setup. I also hold multiple <span class="text-slate-900 font-medium">ASE Certifications</span> and have hands-on shop experience as an Automotive Service Technician at <span class="text-slate-900 font-medium">Glendora Auto Service</span> performing routine vehicle maintenance, brake services, and diagnostics.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Action Links -->
+      <div class="flex flex-wrap items-center gap-3 pt-1 no-print">
+        <button type="button" onclick="navigateTo('projects')" class="px-4 py-2 rounded-md bg-accent hover:bg-accent-hover text-white text-sm font-medium transition-colors inline-flex items-center gap-1.5 cursor-pointer">
+          <span>View Projects</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+        <button type="button" onclick="navigateTo('skills')" class="px-4 py-2 rounded-md border border-slate-200 hover:border-slate-300 bg-slate-50 hover:bg-slate-100 text-slate-800 text-sm font-medium transition-colors cursor-pointer">
+          Skills & Certifications
+        </button>
+        <button type="button" onclick="copyText('mueezahmad58@gmail.com', 'Email copied')" class="px-3 py-2 rounded-md text-xs font-mono text-slate-500 hover:text-slate-900 hover:bg-slate-50 inline-flex items-center gap-1.5 transition-colors cursor-pointer">
+          <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+          <span>mueezahmad58@gmail.com</span>
+        </button>
+      </div>
+
+      <!-- Education Summary Cards -->
+      <div class="space-y-3 pt-4 border-t border-slate-200">
+        <h2 class="text-xs font-mono text-slate-400 uppercase tracking-wider">Education Summary</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-1.5">
+            <div class="flex items-center justify-between text-xs font-mono text-slate-500">
+              <span>Newark, NJ</span>
+              <span>May 2030</span>
+            </div>
+            <div class="font-semibold text-slate-900 text-sm">New Jersey Institute of Technology</div>
+            <div class="text-xs text-accent font-mono">Albert Dorman Honors College</div>
+            <p class="text-xs text-slate-600 pt-1 leading-relaxed">
+              B.S. in Mechanical Engineering, Minor in Electrical Engineering. Junior standing by credits.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-1.5">
+            <div class="flex items-center justify-between text-xs font-mono text-slate-500">
+              <span>Blackwood, NJ</span>
+              <span>May 2026</span>
+            </div>
+            <div class="font-semibold text-slate-900 text-sm">Camden County College</div>
+            <div class="text-xs text-slate-500 font-mono">Associate Degree</div>
+            <p class="text-xs text-slate-600 pt-1 leading-relaxed">
+              Associate Degree in Liberal Arts earned prior to enrolling at NJIT.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Credentials & Current Focus -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-slate-200">
+        <div class="space-y-3">
+          <h2 class="text-xs font-mono text-slate-400 uppercase tracking-wider">Key Credentials</h2>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded-md bg-accent-subtle text-accent border border-accent-border text-xs font-mono font-medium">
+              ASE Certified
+            </span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 border border-slate-200 text-xs font-mono">
+              OSHA Certified
+            </span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 border border-slate-200 text-xs font-mono">
+              CPR Certified
+            </span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 border border-slate-200 text-xs font-mono">
+              BAA Levels 1, 2 & 3
+            </span>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h2 class="text-xs font-mono text-slate-400 uppercase tracking-wider">Current Focus (Fall 2026)</h2>
+          <ul class="space-y-2 text-xs sm:text-sm text-slate-600">
+            <li class="flex items-start gap-2">
+              <span class="font-mono text-xs text-accent mt-0.5">→</span>
+              <span>SolidWorks oil catch can & ring-clamp chassis brackets for NJIT Formula SAE.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-mono text-xs text-accent mt-0.5">→</span>
+              <span>Prototyping an Arduino-based autonomous RC car for FED 101.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="font-mono text-xs text-accent mt-0.5">→</span>
+              <span>Seeking Summer 2027 mechanical or automotive engineering internships.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== 02 / PROJECTS ==================== -->
+    <section id="page-projects" class="page-view space-y-8">
+      
+      <div class="space-y-2">
+        <div class="text-xs font-mono text-accent">02 / PROJECTS</div>
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900">Projects & Hands-On Work</h1>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Engineering coursework, Formula SAE CAD components, ASE-backed automotive shop work, and student leadership initiatives. Select any card to view full details.
+        </p>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="flex flex-wrap items-center gap-2 no-print" role="group" aria-label="Filter projects">
+        <button type="button" onclick="filterProjects('all')" id="filter-all" class="filter-btn px-3 py-1.5 rounded-md text-xs font-mono bg-accent text-white font-medium transition-colors cursor-pointer">
+          All (4)
+        </button>
+        <button type="button" onclick="filterProjects('cad')" id="filter-cad" class="filter-btn px-3 py-1.5 rounded-md text-xs font-mono bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors cursor-pointer">
+          Engineering & CAD
+        </button>
+        <button type="button" onclick="filterProjects('auto')" id="filter-auto" class="filter-btn px-3 py-1.5 rounded-md text-xs font-mono bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors cursor-pointer">
+          Automotive
+        </button>
+        <button type="button" onclick="filterProjects('leadership')" id="filter-leadership" class="filter-btn px-3 py-1.5 rounded-md text-xs font-mono bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors cursor-pointer">
+          Leadership
+        </button>
+      </div>
+
+      <div id="projects-list" class="space-y-4">
+        
+        <!-- Project 1: Formula SAE -->
+        <article data-category="cad" onclick="openProjectModal('fsae')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProjectModal('fsae');}" class="project-card cursor-pointer p-5 rounded-lg border border-slate-200 hover:border-accent/50 bg-white hover:bg-slate-50/70 transition-all space-y-3 focus:outline-none focus:ring-2 focus:ring-accent/30">
+          <div class="flex flex-wrap items-start justify-between gap-2">
+            <div>
+              <h2 class="text-base font-semibold text-slate-900">
+                Formula SAE — Oil Catch Can & Sensor CAD
+              </h2>
+              <div class="text-xs font-mono text-slate-500 mt-0.5">NJIT Powertrain Subteam</div>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-accent-subtle text-accent border border-accent-border text-xs font-mono">
+              2026–Present
+            </span>
+          </div>
+
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Designed an aluminum oil catch can and ring-clamp chassis mounting bracket in SolidWorks for the team's 2008 Yamaha R6 engine, adhering to FSAE 2026 rules and sizing requirements. Also modeled O2 sensor components and put together design matrices to compare and select parts.
+          </p>
+
+          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+            <div class="flex flex-wrap gap-1.5 font-mono text-slate-500">
+              <span class="px-2 py-0.5 bg-slate-100 rounded">SolidWorks</span>
+              <span class="px-2 py-0.5 bg-slate-100 rounded">FSAE Rules</span>
+              <span class="px-2 py-0.5 bg-slate-100 rounded">Design Matrices</span>
+              <span class="px-2 py-0.5 bg-accent-subtle text-accent rounded inline-flex items-center gap-1">
+                <i data-lucide="image" class="w-3 h-3"></i> CAD Preview
+              </span>
+            </div>
+            <span class="text-accent font-medium inline-flex items-center gap-0.5">
+              Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </span>
+          </div>
+        </article>
+
+        <!-- Project 2: FED 101 RC Car -->
+        <article data-category="cad" onclick="openProjectModal('fed')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProjectModal('fed');}" class="project-card cursor-pointer p-5 rounded-lg border border-slate-200 hover:border-accent/50 bg-white hover:bg-slate-50/70 transition-all space-y-3 focus:outline-none focus:ring-2 focus:ring-accent/30">
+          <div class="flex flex-wrap items-start justify-between gap-2">
+            <div>
+              <h2 class="text-base font-semibold text-slate-900">
+                FED 101 — Autonomous RC Car Prototype
+              </h2>
+              <div class="text-xs font-mono text-slate-500 mt-0.5">Fundamentals of Engineering Design · NJIT</div>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200 text-xs font-mono">
+              In Progress · Fall 2026
+            </span>
+          </div>
+
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Currently building an autonomous RC car prototype for Fundamentals of Engineering Design using 3D-printed and laser-cut chassis parts, an Arduino microcontroller, distance/line sensors, and an electric drive motor. Focused on wiring, mechanical fitment, and iterative testing.
+          </p>
+
+          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+            <div class="flex flex-wrap gap-1.5 font-mono text-slate-500">
+              <span class="px-2 py-0.5 bg-slate-100 rounded">Arduino</span>
+              <span class="px-2 py-0.5 bg-slate-100 rounded">3D Printing</span>
+              <span class="px-2 py-0.5 bg-slate-100 rounded">Laser Cutting</span>
+            </div>
+            <span class="text-accent font-medium inline-flex items-center gap-0.5">
+              Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </span>
+          </div>
+        </article>
+
+        <!-- Project 3: Glendora Auto Service -->
+        <article data-category="auto" onclick="openProjectModal('auto')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProjectModal('auto');}" class="project-card cursor-pointer p-5 rounded-lg border border-slate-200 hover:border-accent/50 bg-white hover:bg-slate-50/70 transition-all space-y-3 focus:outline-none focus:ring-2 focus:ring-accent/30">
+          <div class="flex flex-wrap items-start justify-between gap-2">
+            <div>
+              <h2 class="text-base font-semibold text-slate-900">
+                Glendora Auto Service — Automotive Maintenance & Diagnostics
+              </h2>
+              <div class="text-xs font-mono text-slate-500 mt-0.5">Bellmawr, NJ · ASE Certified Technician</div>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 text-xs font-mono">
+              2025–2026
+            </span>
+          </div>
+
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Hands-on shop work performing routine vehicle maintenance and light repairs across customer cars—oil changes, brake pad/rotor services, tire rotations, tune-ups, multi-point inspections, and OBD-II fault diagnostics.
+          </p>
+
+          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+            <div class="flex flex-wrap gap-1.5 font-mono text-slate-500">
+              <span class="px-2 py-0.5 bg-accent-subtle text-accent rounded">ASE Certified</span>
+              <span class="px-2 py-0.5 bg-slate-100 rounded">Brake Service</span>
+              <span class="px-2 py-0.5 bg-slate-100 rounded">OBD-II Diagnostics</span>
+            </div>
+            <span class="text-accent font-medium inline-flex items-center gap-0.5">
+              Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </span>
+          </div>
+        </article>
+
+        <!-- Project 4: School Mural Project -->
+        <article data-category="leadership" onclick="openProjectModal('mural')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProjectModal('mural');}" class="project-card cursor-pointer p-5 rounded-lg border border-slate-200 hover:border-accent/50 bg-white hover:bg-slate-50/70 transition-all space-y-3 focus:outline-none focus:ring-2 focus:ring-accent/30">
+          <div class="flex flex-wrap items-start justify-between gap-2">
+            <div>
+              <h2 class="text-base font-semibold text-slate-900">
+                School Mural Project — Interact Club Leadership
+              </h2>
+              <div class="text-xs font-mono text-slate-500 mt-0.5">Camden County Technical Schools</div>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 text-xs font-mono">
+              2025–2026
+            </span>
+          </div>
+
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Organized and led the painting of the first new mural at Camden County Technical Schools in over a decade through the Interact Club, coordinating student volunteers, planning layouts, and managing supplies.
+          </p>
+
+          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+            <div class="flex flex-wrap gap-1.5 font-mono text-slate-500">
+              <span class="px-2 py-0.5 bg-slate-100 rounded">Project Coordination</span>
+              <span class="px-2 py-0.5 bg-slate-100 rounded">Team Leadership</span>
+              <span class="px-2 py-0.5 bg-accent-subtle text-accent rounded inline-flex items-center gap-1">
+                <i data-lucide="image" class="w-3 h-3"></i> Photo
+              </span>
+            </div>
+            <span class="text-accent font-medium inline-flex items-center gap-0.5">
+              Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================== 03 / EXPERIENCE ==================== -->
+    <section id="page-experience" class="page-view space-y-10">
+      
+      <div class="space-y-2">
+        <div class="text-xs font-mono text-accent">03 / EXPERIENCE</div>
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900">Experience & Education</h1>
+        <p class="text-sm text-slate-600">
+          Work history, technical subteams, student leadership roles, and academic background.
+        </p>
+      </div>
+
+      <!-- Work & Technical Experience -->
+      <div class="space-y-4">
+        <h2 class="text-xs font-mono text-slate-400 uppercase tracking-wider">Work & Technical Experience</h2>
+        
+        <div class="divide-y divide-slate-200 border-y border-slate-200">
+          
+          <div class="py-5 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div>
+                <h3 class="font-semibold text-slate-900 text-base">Formula SAE (NJIT) — Powertrain Subteam Member</h3>
+                <div class="text-xs font-mono text-slate-500">Newark, NJ</div>
+              </div>
+              <span class="text-xs font-mono text-slate-500">2026–Present</span>
+            </div>
+            <ul class="text-sm text-slate-600 space-y-1 list-disc list-inside leading-relaxed">
+              <li>Designed SolidWorks CAD models for the 2008 Yamaha R6 aluminum oil catch can, ring-clamp chassis bracket, and O2 sensor.</li>
+              <li>Assisted with powertrain component packaging and part-selection design matrices.</li>
+            </ul>
+          </div>
+
+          <div class="py-5 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div>
+                <h3 class="font-semibold text-slate-900 text-base">Glendora Auto Service — Automotive Service Technician</h3>
+                <div class="text-xs font-mono text-slate-500">Bellmawr, NJ</div>
+              </div>
+              <span class="text-xs font-mono text-slate-500">2025–2026</span>
+            </div>
+            <ul class="text-sm text-slate-600 space-y-1 list-disc list-inside leading-relaxed">
+              <li>Performed oil changes, tire rotations, brake services, tune-ups, and vehicle inspections across customer vehicles.</li>
+              <li>Used OBD-II diagnostic scan tools and maintained a clean, organized shop bay.</li>
+            </ul>
+          </div>
+
+          <div class="py-5 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div>
+                <h3 class="font-semibold text-slate-900 text-base">Five Below — Retail Associate</h3>
+                <div class="text-xs font-mono text-slate-500">Deptford, NJ</div>
+              </div>
+              <span class="text-xs font-mono text-slate-500">2024–2026</span>
+            </div>
+            <ul class="text-sm text-slate-600 space-y-1 list-disc list-inside leading-relaxed">
+              <li>Managed over 9 self-checkout stations simultaneously and assisted customers on the floor.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Leadership & Activities -->
+      <div class="space-y-4">
+        <h2 class="text-xs font-mono text-slate-400 uppercase tracking-wider">Leadership & Activities</h2>
+        
+        <div class="divide-y divide-slate-200 border-y border-slate-200">
+          
+          <div class="py-5 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div>
+                <h3 class="font-semibold text-slate-900 text-base">SkillsUSA — Vice President</h3>
+                <div class="text-xs font-mono text-slate-500">Camden County Technical Schools</div>
+              </div>
+              <span class="text-xs font-mono text-slate-500">2025–2026</span>
+            </div>
+            <ul class="text-sm text-slate-600 space-y-1 list-disc list-inside leading-relaxed">
+              <li>Introduced SkillsUSA to 200+ new members and ran monthly chapter meetings.</li>
+            </ul>
+          </div>
+
+          <div class="py-5 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div>
+                <h3 class="font-semibold text-slate-900 text-base">Interact Club — Mural Project Lead</h3>
+                <div class="text-xs font-mono text-slate-500">Camden County Technical Schools</div>
+              </div>
+              <span class="text-xs font-mono text-slate-500">2025–2026</span>
+            </div>
+            <ul class="text-sm text-slate-600 space-y-1 list-disc list-inside leading-relaxed">
+              <li>Organized and led the painting of a new school mural—the first completed at the school in over ten years.</li>
+            </ul>
+          </div>
+
+          <div class="py-5 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div>
+                <h3 class="font-semibold text-slate-900 text-base">Model United Nations — Co-Secretary General & Director General</h3>
+                <div class="text-xs font-mono text-slate-500">Camden County Technical Schools</div>
+              </div>
+              <span class="text-xs font-mono text-slate-500">2023–2026</span>
+            </div>
+            <ul class="text-sm text-slate-600 space-y-1 list-disc list-inside leading-relaxed">
+              <li>Mentored incoming Co-Secretary Generals and helped organize and manage conferences for 200+ delegates.</li>
+              <li>Participated as a conference delegate collaborating on diplomatic policy resolutions.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="space-y-4">
+        <h2 class="text-xs font-mono text-slate-400 uppercase tracking-wider">Education</h2>
+        
+        <div class="divide-y divide-slate-200 border-y border-slate-200">
+          
+          <div class="py-5 space-y-1.5">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div>
+                <h3 class="font-semibold text-slate-900 text-base">New Jersey Institute of Technology</h3>
+                <div class="text-xs font-mono text-accent">Albert Dorman Honors College (Junior by credits) · Newark, NJ</div>
+              </div>
+              <span class="text-xs font-mono text-slate-500">Expected May 2030</span>
+            </div>
+            <p class="text-sm text-slate-600">
+              B.S. in Mechanical Engineering, Minor in Electrical Engineering.
+            </p>
+          </div>
+
+          <div class="py-5 space-y-1.5">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div>
+                <h3 class="font-semibold text-slate-900 text-base">Camden County College</h3>
+                <div class="text-xs font-mono text-slate-500">Blackwood, NJ</div>
+              </div>
+              <span class="text-xs font-mono text-slate-500">May 2026</span>
+            </div>
+            <p class="text-sm text-slate-600">
+              Associate Degree in Liberal Arts.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== 04 / SKILLS ==================== -->
+    <section id="page-skills" class="page-view space-y-8">
+      
+      <div class="space-y-2">
+        <div class="text-xs font-mono text-accent">04 / SKILLS</div>
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900">Skills & Certifications</h1>
+        <p class="text-sm text-slate-600">
+          Industry automotive credentials, CAD and prototyping tools, shop capabilities, and leadership awards.
+        </p>
+      </div>
+
+      <!-- Highlighted ASE Banner -->
+      <div class="p-5 rounded-lg border border-accent-border bg-accent-subtle/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="space-y-1">
+          <div class="inline-flex items-center gap-1.5 text-xs font-mono text-accent font-semibold uppercase tracking-wider">
+            <i data-lucide="award" class="w-4 h-4"></i>
+            <span>Automotive Service Excellence</span>
+          </div>
+          <h2 class="text-base font-semibold text-slate-900">ASE Certified Technician</h2>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Validated technical knowledge across vehicle maintenance, light repair, brake systems, and diagnostic procedures.
+          </p>
+        </div>
+        <span class="px-3 py-1.5 rounded-md bg-white border border-accent-border text-accent text-xs font-mono font-medium shrink-0 self-start sm:self-center">
+          Multiple ASE Certs
+        </span>
+      </div>
+
+      <!-- 3 Practical Skill Categories -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <!-- Engineering & CAD -->
+        <div class="p-5 rounded-lg border border-slate-200 bg-slate-50/60 space-y-3">
+          <div class="flex items-center gap-2 text-slate-900 font-semibold text-sm">
+            <i data-lucide="compass" class="w-4 h-4 text-accent"></i>
+            <h2>Engineering & CAD</h2>
+          </div>
+          <ul class="space-y-2 text-xs sm:text-sm text-slate-600">
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>SolidWorks (part modeling, assemblies, mounting brackets)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>3D Printing & Rapid Prototyping</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>Laser Cutting</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>Arduino & Sensor Integration</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>Design Matrices & Technical Documentation</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Automotive & Shop -->
+        <div class="p-5 rounded-lg border border-slate-200 bg-slate-50/60 space-y-3">
+          <div class="flex items-center gap-2 text-slate-900 font-semibold text-sm">
+            <i data-lucide="wrench" class="w-4 h-4 text-accent"></i>
+            <h2>Automotive & Shop</h2>
+          </div>
+          <ul class="space-y-2 text-xs sm:text-sm text-slate-600">
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>ASE Certified Maintenance & Light Repair</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>Brake Pad/Rotor Service & Tire Rotations</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>Vehicle Inspections, Oil Changes & Tune-Ups</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>OBD-II Diagnostic Scan Tools</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>Shop Lift & Equipment Safety</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Software & Communication -->
+        <div class="p-5 rounded-lg border border-slate-200 bg-slate-50/60 space-y-3">
+          <div class="flex items-center gap-2 text-slate-900 font-semibold text-sm">
+            <i data-lucide="file-text" class="w-4 h-4 text-accent"></i>
+            <h2>Software & Communication</h2>
+          </div>
+          <ul class="space-y-2 text-xs sm:text-sm text-slate-600">
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>Microsoft 365 (Word, Excel, PowerPoint)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>Copywriting & Technical Writing</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>Public Speaking</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>Team & Event Leadership</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-slate-400 font-mono">•</span>
+              <span>Bilingual</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Certifications & Awards List -->
+      <div class="space-y-4 pt-4 border-t border-slate-200">
+        <h2 class="text-xs font-mono text-slate-400 uppercase tracking-wider">Certifications & Awards</h2>
+        
+        <div class="divide-y divide-slate-200 border-y border-slate-200 text-sm">
+          
+          <div class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <span class="font-semibold text-slate-900">ASE Certifications (Automotive Service Excellence)</span>
+            <span class="text-xs font-mono text-accent">Automotive Maintenance & Repair</span>
+          </div>
+
+          <div class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <span class="font-medium text-slate-900">OSHA Certification</span>
+            <span class="text-xs font-mono text-slate-500">Workplace & Shop Safety</span>
+          </div>
+
+          <div class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <span class="font-medium text-slate-900">CPR Certified</span>
+            <span class="text-xs font-mono text-slate-500">Emergency Response</span>
+          </div>
+
+          <div class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <span class="font-medium text-slate-900">Business Achievement Awards (BAA) — Levels 1, 2 & 3</span>
+            <span class="text-xs font-mono text-slate-500">Business & Leadership</span>
+          </div>
+
+          <div class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <span class="font-medium text-slate-900">Model UN: Honorable Mention, Best Delegate, 3rd Place Regionals</span>
+            <span class="text-xs font-mono text-slate-500">Conference Awards</span>
+          </div>
+
+          <div class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <span class="font-medium text-slate-900">GSET Nominee (Top 10 States) & Intro to IT</span>
+            <span class="text-xs font-mono text-slate-500">Academic Recognition</span>
+          </div>
+
+          <div class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <span class="font-medium text-slate-900">Intro to Public Speaking</span>
+            <span class="text-xs font-mono text-slate-500">Communication Award</span>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== 05 / CONTACT ==================== -->
+    <section id="page-contact" class="page-view space-y-8">
+      
+      <div class="space-y-2">
+        <div class="text-xs font-mono text-accent">05 / CONTACT</div>
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900">Contact</h1>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Feel free to reach out regarding engineering internships, Formula SAE, automotive work, or class projects.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        
+        <!-- Left: Direct Contact Details -->
+        <div class="md:col-span-5 space-y-4">
+          <div class="p-5 rounded-lg bg-slate-50 border border-slate-200 space-y-4">
+            
+            <div>
+              <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Email</div>
+              <div class="flex items-center justify-between gap-2 mt-1">
+                <a href="mailto:mueezahmad58@gmail.com" class="text-sm font-medium text-accent hover:underline break-all">
+                  mueezahmad58@gmail.com
+                </a>
+                <button type="button" onclick="copyText('mueezahmad58@gmail.com', 'Email copied')" class="p-2 rounded-md hover:bg-slate-200 text-slate-500 transition-colors shrink-0 cursor-pointer" title="Copy email" aria-label="Copy email address">
+                  <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Phone</div>
+              <div class="flex items-center justify-between gap-2 mt-1">
+                <a href="tel:8566172185" class="text-sm font-medium text-slate-800 hover:text-accent">
+                  (856) 617-2185
+                </a>
+                <button type="button" onclick="copyText('(856) 617-2185', 'Phone number copied')" class="p-2 rounded-md hover:bg-slate-200 text-slate-500 transition-colors shrink-0 cursor-pointer" title="Copy phone" aria-label="Copy phone number">
+                  <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">Location</div>
+              <div class="mt-1 text-sm text-slate-700">
+                Blackwood / Newark, NJ
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">LinkedIn</div>
+              <div class="mt-1">
+                <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-accent hover:underline inline-flex items-center gap-1">
+                  <span>linkedin.com/in/mueez-opule</span>
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          <p class="text-xs font-mono text-slate-400">
+            References available upon request.
+          </p>
+        </div>
+
+        <!-- Right: Quick-Compose Mailto Form -->
+        <div class="md:col-span-7">
+          <form onsubmit="handleContactSubmit(event)" class="p-5 rounded-lg border border-slate-200 bg-white space-y-4">
+            <h2 class="text-sm font-semibold text-slate-900">Quick Message</h2>
+            
+            <div class="space-y-1">
+              <label for="contact-name" class="text-xs font-mono text-slate-500">Name</label>
+              <input type="text" id="contact-name" required placeholder="Your name" class="w-full px-3 py-2 text-sm rounded-md border border-slate-200 focus:outline-none focus:border-accent bg-slate-50/40 text-slate-900" />
+            </div>
+
+            <div class="space-y-1">
+              <label for="contact-email" class="text-xs font-mono text-slate-500">Email</label>
+              <input type="email" id="contact-email" required placeholder="you@example.com" class="w-full px-3 py-2 text-sm rounded-md border border-slate-200 focus:outline-none focus:border-accent bg-slate-50/40 text-slate-900" />
+            </div>
+
+            <div class="space-y-1">
+              <label for="contact-message" class="text-xs font-mono text-slate-500">Message</label>
+              <textarea id="contact-message" rows="4" required placeholder="Hi Mueez..." class="w-full px-3 py-2 text-sm rounded-md border border-slate-200 focus:outline-none focus:border-accent bg-slate-50/40 text-slate-900 resize-none"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-2.5 px-4 rounded-md bg-accent hover:bg-accent-hover text-white text-sm font-medium transition-colors cursor-pointer">
+              Compose in Email Client
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Minimalist Footer -->
+  <footer class="border-t border-slate-200 py-6 bg-slate-50/50 text-xs text-slate-500 font-mono">
+    <div class="max-w-3xl mx-auto px-5 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>Mueez Opule · Mechanical Engineering @ NJIT</div>
+      <div class="flex items-center gap-3">
+        <a href="mailto:mueezahmad58@gmail.com" class="hover:text-accent">mueezahmad58@gmail.com</a>
+        <span>·</span>
+        <button type="button" onclick="window.print()" class="hover:text-slate-800 cursor-pointer">print</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Details Modal -->
+  <div id="project-modal" onclick="if(event.target === this) closeProjectModal()" class="fixed inset-0 z-50 bg-slate-900/40 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="bg-white rounded-lg border border-slate-200 max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 space-y-4 shadow-lg">
+      
+      <div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-3">
+        <div>
+          <span id="modal-meta" class="text-xs font-mono text-accent">META</span>
+          <h3 id="modal-title" class="text-lg font-semibold text-slate-900 mt-0.5">Project Title</h3>
+        </div>
+        <button type="button" onclick="closeProjectModal()" class="text-slate-400 hover:text-slate-700 p-1.5 rounded-md hover:bg-slate-100 cursor-pointer" aria-label="Close modal">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Optional Visual Frame -->
+      <figure id="modal-figure" class="hidden space-y-2 rounded-lg border border-slate-200 bg-slate-50 p-2.5">
+        <div id="modal-image-wrapper" class="w-full overflow-hidden rounded-md bg-slate-100 border border-slate-200/80 flex items-center justify-center">
+          <img id="modal-image" src="" alt="" class="w-full block transition-transform duration-200" />
+        </div>
+        <figcaption id="modal-caption" class="text-xs font-mono text-slate-500 leading-relaxed px-0.5"></figcaption>
+      </figure>
+
+      <p id="modal-desc" class="text-sm text-slate-600 leading-relaxed">
+        Description text.
+      </p>
+
+      <div class="space-y-2">
+        <div class="text-xs font-mono text-slate-400 uppercase tracking-wider">What I Worked On</div>
+        <ul id="modal-points" class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc list-inside leading-relaxed">
+        </ul>
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+        <span class="font-mono text-slate-400">More info or CAD files on request</span>
+        <button type="button" onclick="closeProjectModal(); navigateTo('contact');" class="text-accent hover:underline font-medium cursor-pointer">
+          Contact me →
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const validPages = ['about', 'projects', 'experience', 'skills', 'contact'];
+
+    function navigateTo(pageId, event) {
+      if (event) event.preventDefault();
+      if (!validPages.includes(pageId)) pageId = 'about';
+
+      // Switch visible section
+      document.querySelectorAll('.page-view').forEach(section => {
+        section.classList.remove('active-page');
+      });
+      const target = document.getElementById('page-' + pageId);
+      if (target) target.classList.add('active-page');
+
+      // Update active nav tab styling
+      document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.classList.remove('text-accent', 'bg-accent-subtle', 'font-semibold');
+        tab.classList.add('hover:text-slate-900', 'hover:bg-slate-100');
+      });
+      const activeTab = document.getElementById('tab-' + pageId);
+      if (activeTab) {
+        activeTab.classList.remove('hover:text-slate-900', 'hover:bg-slate-100');
+        activeTab.classList.add('text-accent', 'bg-accent-subtle', 'font-semibold');
+      }
+
+      // Sync URL hash without jumping
+      if (window.location.hash !== '#' + pageId) {
+        try {
+          history.pushState(null, '', '#' + pageId);
+        } catch (e) {
+          window.location.hash = pageId;
+        }
+      }
+
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    // Filter Projects by Category
+    function filterProjects(category) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('bg-accent', 'text-white', 'font-medium');
+        btn.classList.add('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+      });
+      const activeBtn = document.getElementById('filter-' + category);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+        activeBtn.classList.add('bg-accent', 'text-white', 'font-medium');
+      }
+
+      document.querySelectorAll('.project-card').forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Project Detail Modal Data
+    const projectDetails = {
+      fsae: {
+        meta: 'NJIT FORMULA SAE · 2026–PRESENT',
+        title: 'Oil Catch Can & Sensor CAD',
+        image: {
+          src: 'image_47e601.png',
+          alt: 'Clean SolidWorks CAD export of the aluminum oil catch can, top ports, vertical mounting bracket, and bolted collar strap',
+          caption: 'SolidWorks assembly export showing cylindrical catch can body, top ports, vertical mounting bracket, and bolted collar strap.',
+          wrapperClass: 'aspect-[4/5] max-h-80 bg-[#e8eaed]',
+          imgClass: 'w-full h-full object-contain p-2',
+          fallbackText: 'Oil+Catch+Can+CAD'
+        },
+        desc: 'Part of the NJIT Formula SAE powertrain subteam working on packaging components for the team’s 2008 Yamaha R6 engine.',
+        points: [
+          'Modeled an aluminum oil catch can in SolidWorks sized to satisfy FSAE 2026 crankcase breather rules.',
+          'Designed the ring-clamp chassis mounting bracket for secure fitment and service access.',
+          'Created CAD models for O2 sensor components and put together design matrices to evaluate and select parts.'
+        ]
+      },
+      fed: {
+        meta: 'FUNDAMENTALS OF ENGINEERING DESIGN · IN PROGRESS (FALL 2026)',
+        title: 'Autonomous RC Car Prototype',
+        desc: 'Ongoing freshman engineering design project focused on building an autonomous remote-controlled car prototype from scratch.',
+        points: [
+          'Fabricating chassis and mounting components using 3D printing and laser cutting.',
+          'Wiring an Arduino microcontroller, onboard sensors, and an electric drive motor.',
+          'Iterating on mechanical fitment, weight balance, and reliable control.'
+        ]
+      },
+      auto: {
+        meta: 'GLENDORA AUTO SERVICE · 2025–2026 · ASE CERTIFIED',
+        title: 'Automotive Maintenance & Diagnostics',
+        desc: 'Worked as an ASE Certified Automotive Service Technician in Bellmawr, NJ performing routine maintenance and light repairs on customer vehicles.',
+        points: [
+          'Completed oil and filter changes, tire rotations, brake pad/rotor replacements, and routine tune-ups.',
+          'Performed multi-point vehicle inspections and used OBD-II diagnostic scan tools to check trouble codes.',
+          'Operated shop lifts and equipment safely while keeping service bays clean and organized.'
+        ]
+      },
+      mural: {
+        meta: 'INTERACT CLUB · 2025–2026',
+        title: 'School Mural Project',
+        image: {
+          src: '4533.jpg',
+          alt: 'Completed Follow the Path of a Warrior school mural painted at Camden County Technical Schools',
+          caption: 'Completed "Follow the Path of a Warrior" school mural at Camden County Technical Schools led through Interact Club.',
+          wrapperClass: 'aspect-[16/10] bg-slate-100',
+          imgClass: 'w-full h-full object-cover object-[64%_center]',
+          fallbackText: 'School+Mural+Project'
+        },
+        desc: 'Led a service project through the Interact Club at Camden County Technical Schools to paint the first new school mural in over ten years.',
+        points: [
+          'Proposed and organized the mural project through the school Interact Club.',
+          'Coordinated student volunteers, planned wall layouts, and managed paint and supply logistics.',
+          'Delivered a completed permanent mural for the school community.'
+        ]
+      }
+    };
+
+    function openProjectModal(key) {
+      const data = projectDetails[key];
+      if (!data) return;
+
+      document.getElementById('modal-meta').textContent = data.meta;
+      document.getElementById('modal-title').textContent = data.title;
+      document.getElementById('modal-desc').textContent = data.desc;
+
+      const figure = document.getElementById('modal-figure');
+      const wrapper = document.getElementById('modal-image-wrapper');
+      const img = document.getElementById('modal-image');
+      const caption = document.getElementById('modal-caption');
+
+      if (data.image) {
+        img.onerror = function () {
+          this.onerror = null;
+          this.src = `https://placehold.co/800x480/f1f5f9/475569?text=${data.image.fallbackText}`;
+        };
+        wrapper.className = `w-full overflow-hidden rounded-md border border-slate-200/80 flex items-center justify-center ${data.image.wrapperClass || 'bg-slate-100'}`;
+        img.src = data.image.src;
+        img.alt = data.image.alt;
+        img.className = `block transition-transform duration-200 ${data.image.imgClass || 'w-full'}`;
+        caption.textContent = data.image.caption;
+        figure.classList.remove('hidden');
+      } else {
+        img.removeAttribute('src');
+        figure.classList.add('hidden');
+      }
+
+      const list = document.getElementById('modal-points');
+      list.innerHTML = '';
+      data.points.forEach(pt => {
+        const li = document.createElement('li');
+        li.textContent = pt;
+        list.appendChild(li);
+      });
+
+      const modal = document.getElementById('project-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectModal() {
+      const modal = document.getElementById('project-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeProjectModal();
+    });
+
+    // Copy to clipboard using reliable textarea fallback for iFrame compatibility
+    let toastTimer;
+    function copyText(text, label) {
+      try {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast(label || 'Copied to clipboard');
+      } catch (err) {
+        showToast('Could not copy automatically');
+      }
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      toastText.textContent = message;
+      toast.classList.remove('translate-y-16', 'opacity-0');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add('translate-y-16', 'opacity-0');
+      }, 2400);
+    }
+
+    // Quick Message mailto composer
+    function handleContactSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('contact-name').value.trim();
+      const email = document.getElementById('contact-email').value.trim();
+      const message = document.getElementById('contact-message').value.trim();
+
+      const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nReply Email: ${email}\n\n${message}`);
+      window.location.href = `mailto:mueezahmad58@gmail.com?subject=${subject}&body=${body}`;
+      showToast('Opening email client...');
+    }
+
+    // Handle browser back/forward buttons & initial load
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#', '');
+      navigateTo(hash || 'about');
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+      const initialHash = window.location.hash.replace('#', '');
+      if (initialHash && validPages.includes(initialHash)) {
+        navigateTo(initialHash);
+      }
+    });
+  </script>
+</body>
+</html>
